@@ -4,18 +4,18 @@ import pyperclip, sys, random
 LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
  
-def main():
+def sub_main():
     myMessage = 'If a man is offered a fact which goes against his instincts, he will scrutinize it closely, and unless the evidence is overwhelming, he will refuse to believe it. If, on the other hand, he is offered something which affords a reason for acting in accordance to his instincts, he will accept it even on the slightest evidence. The origin of m  yths is explained in this way. -Bert  r and Russell'
     myKey = 'LFWOAYUISVKMNXPBDCRJTQEGHZ'
     myMode = 'encrypt' # set to 'encrypt' or 'decrypt'
-    checkValidKey(myKey)
+    sub_checkValidKey(myKey)
 
 
 
     if myMode == 'encrypt':
-        translated = encryptMessage(myKey, myMessage)
+        translated = sub_encryptMessage(myKey, myMessage)
     elif myMode == 'decrypt':
-        translated = decryptMessage(myKey, myMessage)
+        translated = sub_decryptMessage(myKey, myMessage)
     print('Using key %s' % (myKey))
 
     print('The %sed message is:' % (myMode))
@@ -32,7 +32,7 @@ def main():
 
 
 
-def checkValidKey(key):
+def sub_checkValidKey(key):
 
     keyList = list(key)
     lettersList = list(LETTERS)
@@ -46,15 +46,15 @@ def checkValidKey(key):
 
 
 
-def encryptMessage(key, message):
+def sub_encryptMessage(key, message):
 
-    return translateMessage(key, message, 'encrypt')
+    return sub_translateMessage(key, message, 'encrypt')
 
 
 
-def decryptMessage(key, message):
-    return translateMessage(key, message, 'decrypt')
-def translateMessage(key, message, mode):
+def sub_decryptMessage(key, message):
+    return sub_translateMessage(key, message, 'decrypt')
+def sub_translateMessage(key, message, mode):
     translated = ''
     charsA = LETTERS
     charsB = key
@@ -83,7 +83,7 @@ def translateMessage(key, message, mode):
 
 
 
-def getRandomKey():
+def sub_getRandomKey():
 
     key = list(LETTERS)
 
@@ -94,4 +94,4 @@ def getRandomKey():
 
 if __name__ == '__main__':
 
-    main();
+    sub_main();
