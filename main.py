@@ -1,7 +1,3 @@
-
-from cgi import print_environ_usage
-from email import message
-from math import e
 from tabulate import tabulate
 import string
 import secrets
@@ -21,8 +17,11 @@ def substitution_cipher():
             charA,charB = charB,charA
         
         for symbol in message:
-            indexid= charA.find(symbol)    
-            
+            indexid= charA.find(symbol)
+            if indexid == -1:
+                translated = translated + symbol
+            else:        
+                translated = translated + charB[indexid]
 
             
         return translated
