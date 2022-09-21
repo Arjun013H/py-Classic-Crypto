@@ -4,49 +4,48 @@ import secrets
 
 
 def substitution_cipher():
-    cipher_txt=""
-    plain_txt=""
-    all_letters=string.ascii_letters
-    
-    def enc_dec_msg(key,message,mode):
-        translated=''
-        charA= all_letters
-        charB= key
-        if mode in ("Decrypt","decrypt","D","d"):
+    cipher_txt = ""
+    plain_txt = ""
+    all_letters = string.ascii_letters
+
+    def enc_dec_msg(key, message, mode):
+        translated = ''
+        charA = all_letters
+        charB = key
+        if mode in ("Decrypt", "decrypt", "D", "d"):
             print("hi")
-            charA,charB = charB,charA
-        
+            charA, charB = charB, charA
+
         for symbol in message:
-            indexid= charA.find(symbol)
+            indexid = charA.find(symbol)
             if indexid == -1:
                 translated = translated + symbol
-            else:        
+            else:
                 translated = translated + charB[indexid]
 
-            
         return translated
+
     def gen_Key():
-        key=list(all_letters)
+        key = list(all_letters)
         secrets.SystemRandom(1).shuffle(key)
         return "".join(key)
 
     mode = input("Decrypt/Encrypt (D/E) ")
-    if mode in ("Decrypt","decrypt","D","d"):
-        message= input("Enter CT:")
+    if mode in ("Decrypt", "decrypt", "D", "d"):
+        message = input("Enter CT:")
         key = input("Enter key:")
-    elif mode in ("encrypt","E","e"):
-        message= input("Enter PT:")
+    elif mode in ("encrypt", "E", "e"):
+        message = input("Enter PT:")
         key = gen_Key()
         print(f"the key is {key}")
-    msg = enc_dec_msg(key,message,mode)
+    msg = enc_dec_msg(key, message, mode)
 
     print(f"the transalated message is \n{msg}")
 
 
 
-int()
 def main():
-    
+
     slno_input = int(input("Enter menu Number:-"))
 
     if slno_input == 1:
@@ -56,10 +55,10 @@ def main():
     else:
         print("enter a valid menu number!!")
         main()
-        
+
 
 if __name__ == '__main__':
-    l=[[1,"substitution cipher"],[2,"exit"]]
+    l = [[1, "substitution cipher"], [2, "exit"]]
     table = tabulate(l, headers=['slno', 'Cipher'], tablefmt='pretty')
     print(table)
     main()
