@@ -1,3 +1,5 @@
-print("Hhh")
-print("yah")
-print("oh ok")
+def main():
+    pass
+
+if __name__ == '__main__':
+    main()
