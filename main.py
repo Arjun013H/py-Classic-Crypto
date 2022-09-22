@@ -43,7 +43,45 @@ def substitution_cipher():
     print(f"the transalated message is \n{msg}")
 
 def Caesar_Cipher():
-    pass
+    # Caesar Cipher
+
+    mode = input("Decrypt/Encrypt (D/E) ")
+    if mode in ("Decrypt", "decrypt", "D", "d"):
+        message = input("Enter CT:")
+        key = int(input("Enter key:"))
+        mode = 'decrypt'
+    elif mode in ("encrypt", "E", "e"):
+        message = input("Enter PT:")
+        key = secrets.SystemRandom(1).randint(1,25)
+        print(f"the key is {key}")
+        mode = 'encrypt'
+
+    LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    translated = ''
+    message = message.upper()
+    for symbol in message:
+        if symbol in LETTERS:
+            # get the encrypted (or decrypted) number for this symbol
+            num = LETTERS.find(symbol) # get the number of the symbol
+            if mode == 'encrypt':
+                num = num + key
+            elif mode == 'decrypt':
+                num = num - key
+            # handle the wrap-around if num is larger than the length of
+            # LETTERS or less than 0
+            if num >= len(LETTERS):
+                num = num - len(LETTERS)
+            elif num < 0:
+                num = num + len(LETTERS)
+            # add encrypted/decrypted number's symbol at the end of translated
+            translated = translated + LETTERS[num]
+        else:
+            # just add the symbol without encrypting/decrypting
+            translated = translated + symbol
+    # print the encrypted/decrypted string to the screen
+    print(translated)
+    # copy the encrypted/decrypted string to the clipboard
+
 
 
 def main():
@@ -62,9 +100,11 @@ def main():
 
 
 if __name__ == '__main__':
-    l = [[1, "substitution cipher"],[2,"The Caesar Cipher"], [10, "exit"]]
-    table = tabulate(l, headers=['slno', 'Cipher'], tablefmt='pretty')
-    print(table)
-    main()
+    while True:
+
+        l = [[1, "substitution cipher"],[2,"The Caesar Cipher"], [10, "exit"]]
+        table = tabulate(l, headers=['slno', 'Cipher'], tablefmt='pretty')
+        print(table)
+        main()
 
 print("hello")
