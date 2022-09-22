@@ -62,3 +62,5 @@ if __name__ == '__main__':
     table = tabulate(l, headers=['slno', 'Cipher'], tablefmt='pretty')
     print(table)
     main()
+
+print("hello")
