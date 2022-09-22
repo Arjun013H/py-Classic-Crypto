@@ -42,6 +42,8 @@ def substitution_cipher():
 
     print(f"the transalated message is \n{msg}")
 
+def Caesar_Cipher():
+    pass
 
 
 def main():
@@ -51,6 +53,8 @@ def main():
     if slno_input == 1:
         substitution_cipher()
     elif slno_input == 2:
+        Caesar_Cipher()
+    elif slno_input == 10:
         exit()
     else:
         print("enter a valid menu number!!")
@@ -58,7 +62,7 @@ def main():
 
 
 if __name__ == '__main__':
-    l = [[1, "substitution cipher"], [2, "exit"]]
+    l = [[1, "substitution cipher"],[2,"The Caesar Cipher"], [10, "exit"]]
     table = tabulate(l, headers=['slno', 'Cipher'], tablefmt='pretty')
     print(table)
     main()
