@@ -13,7 +13,6 @@ def substitution_cipher():
         charA = all_letters
         charB = key
         if mode in ("Decrypt", "decrypt", "D", "d"):
-            print("hi")
             charA, charB = charB, charA
 
         for symbol in message:
@@ -36,7 +35,9 @@ def substitution_cipher():
         key = input("Enter key:")
     elif mode in ("encrypt", "E", "e"):
         message = input("Enter PT:")
-        key = gen_Key()
+        key = input("Enter key:")
+        if key == "":
+            key = gen_Key()
         print(f"the key is {key}")
     msg = enc_dec_msg(key, message, mode)
 
@@ -52,7 +53,10 @@ def Caesar_Cipher():
         mode = 'decrypt'
     elif mode in ("encrypt", "E", "e"):
         message = input("Enter PT:")
-        key = secrets.SystemRandom(1).randint(1,25)
+        try:
+            key = int(input("Enter key:"))
+        except:
+            key = secrets.SystemRandom(1).randint(1,25)
         print(f"the key is {key}")
         mode = 'encrypt'
 
