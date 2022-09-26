@@ -8,7 +8,7 @@ SYMBOLS = """!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\] ^_`ab
 
 def main():
     myMessage = """"A computer would deserve to be called intelligent if it could deceive a human into believing that it was human." -Alan Turing"""
-    myKey = 2022
+    myKey = 1212
     myMode = 'encrypt' # set to 'encrypt' or 'decrypt'
     if myMode == 'encrypt':
         translated = encryptMessage(myKey, myMessage)
