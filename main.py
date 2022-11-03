@@ -3,6 +3,26 @@ import string
 import secrets
 
 
+def logo():
+    a='''
+
+    ___________________ _________  
+    \______   \_   ___ \\_   ___ \ 
+    |     ___/    \  \//    \  \/ 
+    |    |   \     \___\     \____
+    |____|    \______  /\______  /
+                    \/        \/ 
+
+    '''
+    print(a)
+
+
+
+
+
+
+
+
 def substitution_cipher():
     cipher_txt = ""
     plain_txt = ""
@@ -99,7 +119,16 @@ def main():
         main()
 
 
+
+
+
+
+
+
+
 if __name__ == '__main__':
+
+    logo()
     while True:
 
         l = [[1, "substitution cipher"],[2,"The Caesar Cipher"], [10, "exit"]]
@@ -107,4 +136,3 @@ if __name__ == '__main__':
         print(table)
         main()
 
-print("hello")
