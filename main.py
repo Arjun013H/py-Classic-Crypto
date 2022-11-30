@@ -33,7 +33,7 @@ def substitution_cipher():
         charA = all_letters
         charB = key
         if mode in ("Decrypt", "decrypt", "D", "d"):
-            print("hi")
+            # print("hi")
             charA, charB = charB, charA
 
         for symbol in message:
