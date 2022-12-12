@@ -44,14 +44,38 @@ def substitution_cipher():
         secrets.SystemRandom(1).shuffle(key)
         return "".join(key)
 
-    mode = input("Decrypt/Encrypt (D/E) ")
+    def checkValidKey(key):
+        key_list = list(key)
+        letters_list = list(string.ascii_letters)
+        key_list.sort()
+        letters_list.sort()
+        if key_list != letters_list:
+            print("Not A Valid Key ")
+            return False
+        return True
+
+    def brute():
+        pass
+    mode = input("Encrypt/Decrypt/Brute (E/D/Brute) ")
     if mode in ("Decrypt", "decrypt", "D", "d"):
         message = input("Enter CT:")
         key = input("Enter key:")
     elif mode in ("encrypt", "E", "e"):
         message = input("Enter PT:")
-        key = gen_Key()
-        print(f"the key is {key}")
+        key = input("Enter key:")
+        if key == "":
+            key = gen_Key()
+            print(f"the key is {key}")
+    elif mode in ("Brute","B","b"):
+        message = input("Enter CT:")
+        mode = 'brute'
+
+    if mode == 'brute':
+
+        return
+
+    if checkValidKey(key) == False:
+        return
     msg = enc_dec_msg(key, message, mode)
 
     print(f"the transalated message is \n{msg}")
@@ -60,20 +84,59 @@ def substitution_cipher():
 def Caesar_Cipher():
     # Caesar Cipher
 
-    mode = input("Decrypt/Encrypt (D/E) ")
+    mode = input("Decrypt/Encrypt/Brute (D/E/B) ")
     if mode in ("Decrypt", "decrypt", "D", "d"):
         message = input("Enter CT:")
         key = int(input("Enter key:"))
         mode = 'decrypt'
     elif mode in ("encrypt", "E", "e"):
         message = input("Enter PT:")
-        key = secrets.SystemRandom(1).randint(1, 25)
+        key = input("Enter key:")
+        if key == '':
+
+            key = secrets.SystemRandom(1).randint(1, 25)
+        key = int(key)%26
+        if key == 0:
+            print("Not a Vaid Key")
+            return
         print(f"the key is {key}")
         mode = 'encrypt'
+    elif mode in ("Brute","B","b"):
+        message = input("Enter CT:")
+        mode = 'brute'
 
-    LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
     translated = ''
-    message = message.upper()
+
+    if mode == 'brute':
+        
+        for key in range(len(LETTERS)):
+
+            translated = ""
+
+            for symbol in message:
+                if symbol in LETTERS:
+                    num = LETTERS.find(symbol)
+                    num = num - key
+
+                    if num < 0:
+                        num = num + len(LETTERS)
+
+                    translated = translated + LETTERS[num]
+
+                else:
+                    translated = translated + symbol
+
+            print("Key #%s: %s" % (key, translated))
+        return 
+        
+
+
+
+    # message = message.upper()
+
+
+
     for symbol in message:
         if symbol in LETTERS:
             # get the encrypted (or decrypted) number for this symbol
@@ -94,7 +157,7 @@ def Caesar_Cipher():
             # just add the symbol without encrypting/decrypting
             translated = translated + symbol
     # print the encrypted/decrypted string to the screen
-    print(translated)
+    print(f'the {mode}ed text is {translated}')
     # copy the encrypted/decrypted string to the clipboard
 
 
