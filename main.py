@@ -66,7 +66,7 @@ def substitution_cipher():
         if key == "":
             key = gen_Key()
             print(f"the key is {key}")
-    elif mode in ("Brute","B","b"):
+    elif mode in ("Brute", "B", "b"):
         message = input("Enter CT:")
         mode = 'brute'
 
@@ -95,13 +95,13 @@ def Caesar_Cipher():
         if key == '':
 
             key = secrets.SystemRandom(1).randint(1, 25)
-        key = int(key)%26
+        key = int(key) % 26
         if key == 0:
             print("Not a Vaid Key")
             return
         print(f"the key is {key}")
         mode = 'encrypt'
-    elif mode in ("Brute","B","b"):
+    elif mode in ("Brute", "B", "b"):
         message = input("Enter CT:")
         mode = 'brute'
 
@@ -109,7 +109,7 @@ def Caesar_Cipher():
     translated = ''
 
     if mode == 'brute':
-        
+
         for key in range(len(LETTERS)):
 
             translated = ""
@@ -128,14 +128,9 @@ def Caesar_Cipher():
                     translated = translated + symbol
 
             print("Key #%s: %s" % (key, translated))
-        return 
-        
-
-
+        return
 
     # message = message.upper()
-
-
 
     for symbol in message:
         if symbol in LETTERS:
