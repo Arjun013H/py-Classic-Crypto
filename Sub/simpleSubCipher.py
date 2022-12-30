@@ -1,71 +1,66 @@
-import pyperclip, sys, random
+import string
+import secrets
+def substitution_cipher():
+    cipher_txt = ""
+    plain_txt = ""
+    all_letters = string.ascii_letters
 
-LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    def enc_dec_msg(key, message, mode):
+        translated = ''
+        charA = all_letters
+        charB = key
+        if mode in ("Decrypt", "decrypt", "D", "d"):
+            # print("hi")
+            charA, charB = charB, charA
 
-def main():
-    myMessage = 'If a man is offered a fact which goes against his instincts, he will scrutinize it closely, and unless the evidence is overwhelming, he will refuse to believe it. If, on the other hand, he is offered something which affords a reason for acting in accordance to his instincts, he will accept it even on the slightest evidence. The origin of myths is explained in this way. -Bertrand Russell'
-    myKey = 'LFWOAYUISVKMNXPBDCRJTQEGHZ'
-    myMode = 'encrypt' # Set to 'encrypt' or 'decrypt'.
-
-    if keyIsValid(myKey):
-        sys.exit('There is an error in the key or symbol set.')
-    if myMode == 'encrypt':
-        translated = encryptMessage(myKey, myMessage)
-    elif myMode == 'decrypt':
-        translated = decryptMessage(myKey, myMessage)
-    print('Using key %s' % (myKey))
-    print('The %sed message is:' % (myMode))
-    print(translated)
-    pyperclip.copy(translated)
-    print()
-    print('This message has been copied to the clipboard.')
-
-def keyIsValid(key):
-    keyList = list(key)
-    lettersList = list(LETTERS)
-    keyList.sort()
-    lettersList.sort()
-
-    return keyList == lettersList
-
-def encryptMessage(key, message):
-    return translateMessage(key, message, 'encrypt')
-
-def decryptMessage(key, message):
-    return translateMessage(key, message, 'decrypt')
-
-
-
-def translateMessage(key, message, mode):
-    translated = ''
-    charsA = LETTERS
-    charsB = key
-    if mode == 'decrypt':
-         # For decrypting, we can use the same code as encrypting. We
-         # just need to swap where the key and LETTERS strings are used.
-        charsA, charsB = charsB, charsA
-
-     # Loop through each symbol in the message:
-    for symbol in message:
-        if symbol.upper() in charsA:
-             # Encrypt/decrypt the symbol:
-            symIndex = charsA.find(symbol.upper())
-            if symbol.isupper():
-                 translated += charsB[symIndex].upper()
+        for symbol in message:
+            indexid = charA.find(symbol)
+            if indexid == -1:
+                translated = translated + symbol
             else:
-                 translated += charsB[symIndex].lower()
-        else:
-             # Symbol is not in LETTERS; just add it:
-             translated += symbol
+                translated = translated + charB[indexid]
 
-    return translated
+        return translated
 
+    def gen_Key():
+        key = list(all_letters)
+        secrets.SystemRandom(1).shuffle(key)
+        return "".join(key)
 
-def getRandomKey():
-    key = list(LETTERS)
-    random.shuffle(key)
-    return ''.join(key)
+    def checkValidKey(key):
+        key_list = list(key)
+        letters_list = list(string.ascii_letters)
+        key_list.sort()
+        letters_list.sort()
+        if key_list != letters_list:
+            print("Not A Valid Key ")
+            return False
+        return True
 
+    def brute():
+        pass
+    mode = input("Encrypt/Decrypt/Brute (E/D/Brute) ")
+    if mode in ("Decrypt", "decrypt", "D", "d"):
+        message = input("Enter CT:")
+        key = input("Enter key:")
+    elif mode in ("encrypt", "E", "e"):
+        message = input("Enter PT:")
+        key = input("Enter key:")
+        if key == "":
+            key = gen_Key()
+            print(f"the key is {key}")
+    elif mode in ("Brute", "B", "b"):
+        message = input("Enter CT:")
+        mode = 'brute'
 
-if __name__ == '__main__':
-     main()
+    if mode == 'brute':
+
+        return
+
+    if checkValidKey(key) == False:
+        return
+    msg = enc_dec_msg(key, message, mode)
+
+    print(f"the transalated message is \n{msg}")
+
+substitution_cipher()
